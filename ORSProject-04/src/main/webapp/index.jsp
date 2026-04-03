@@ -1,6 +1,7 @@
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@page import="in.co.rays.bean.UserBean"%>
-<%@page import="in.co.rays.controller.ORSView"%>
+
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
+<%@page import="in.co.rays.proj4.bean.UserBean"%>
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
 <html>
 <head>
 <title>Online Result System</title>
@@ -31,7 +32,7 @@
 
 	<h1 align="center">
 		<font size="10px" color="red"> <a
-			href="<%=ORSView.WELCOME_CTL%>">Online Result System1234</a></font>
+			href="<%=ORSView.WELCOME_CTL%>">Online Result System</a></font>
 	</h1>
 
 </body>

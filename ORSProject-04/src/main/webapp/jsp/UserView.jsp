@@ -1,12 +1,10 @@
-x<%@page import="in.co.rays.util.HTMLUtility"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="in.co.rays.controller.UserCtl"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="in.co.rays.proj4.controller.UserCtl"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <html>
 <head>
 <title>Add User</title>
@@ -18,15 +16,17 @@ x<%@page import="in.co.rays.util.HTMLUtility"%>
 
 		<%@ include file="Header.jsp"%>
 
-		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
+		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>
+		<%
+			HashMap<String, String> map = (HashMap<String, String>) request.getAttribute("map");
+		%>
 
 		<%
 			List<UserBean> roleList = (List<UserBean>) request.getAttribute("roleList");
 		%>
 
 		<div align="center">
-		
 			<h1 align="center" style="margin-bottom: -15; color: navy">
 				<%
 					if (bean != null && bean.getId() > 0) {
@@ -81,7 +81,12 @@ x<%@page import="in.co.rays.util.HTMLUtility"%>
 						value="<%=DataUtility.getStringData(bean.getLogin())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("login", request)%></font></td>
 				</tr>
-				<tr>
+				<%
+					if (bean != null && bean.getId() > 0) {
+				%>
+				<%
+					} else {
+				%><tr>
 					<th align="left">Password<span style="color: red">*</span></th>
 					<td><input type="password" name="password"
 						placeholder="Enter Password"
@@ -95,10 +100,15 @@ x<%@page import="in.co.rays.util.HTMLUtility"%>
 						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
+				<%
+					}
+				%>
+
 				<tr>
 					<th align="left">Date of Birth<span style="width: 98%"
 						style="color: red">*</span></th>
-					<td><input type="text" id="udate" name="dob" placeholder="Select Date of Birth"
+					<td><input type="Text" id="udate" name="dob"
+						placeholder="Select Date of Birth"
 						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
@@ -106,11 +116,6 @@ x<%@page import="in.co.rays.util.HTMLUtility"%>
 					<th align="left">Gender<span style="color: red">*</span></th>
 					<td>
 						<%
-							HashMap<String, String> map = new HashMap<String, String>();
-							map.put("Male", "Male");
-							map.put("Female", "Female");
-							map.put("Other", "Other");
-
 							String htmlList = HTMLUtility.getList("gender", bean.getGender(), map);
 						%> <%=htmlList%>
 					</td>
@@ -150,9 +155,28 @@ x<%@page import="in.co.rays.util.HTMLUtility"%>
 							}
 						%>
 				</tr>
+				<%
+					if (bean != null && bean.getId() > 0) {
+				%><tr>
+					<td><input type="hidden" name="password"
+						placeholder="Enter Password"
+						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
+					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("password", request)%></font></td>
+				</tr>
+				<tr>
+					<td><input type="hidden" name="confirmPassword"
+						placeholder="Enter Confirm Password"
+						value="<%=DataUtility.getStringData(bean.getPassword())%>"></td>
+					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
+				</tr>
+				<%
+					} else {
+				%>
+				<%
+					}
+				%>
 			</table>
 		</div>
 	</form>
-	<%@ include file="Footer.jsp" %>
 </body>
 </html>

@@ -1,13 +1,13 @@
-<%@page import="in.co.rays.controller.FacultyCtl"%>
-<%@page import="in.co.rays.util.HTMLUtility"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@page import="in.co.rays.bean.FacultyBean"%>
+
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="in.co.rays.proj4.controller.UserCtl"%>
+<%@page import="in.co.rays.proj4.bean.FacultyBean"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@page import="java.util.HashMap"%>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
+<%@page import="in.co.rays.proj4.controller.FacultyCtl"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <html>
 <head>
 <title>Add Faculty</title>
@@ -18,7 +18,7 @@
 	<form action="<%=ORSView.FACULTY_CTL%>" method="post">
 		<%@ include file="Header.jsp"%>
 
-		<jsp:useBean id="bean" class="in.co.rays.bean.FacultyBean"
+		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.FacultyBean"
 			scope="request"></jsp:useBean>
 
 		<%
@@ -81,9 +81,9 @@
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("email", request)%></font></td>
 				</tr>
 				<tr>
-					<th align="left">Date of Birth<span style="width: 98%"
-						style="color: red">*</span></th>
-					<td><input type="text" id="udate" name="dob" placeholder="Select Date of Birth"
+					<th align="left">Date of Birth<span style="color: red">*</span></th>
+					<td><input type="text" id="udate" name="dob"
+						placeholder="Select Date of Birth"
 						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
@@ -148,6 +148,5 @@
 			</table>
 		</div>
 	</form>
-	<%@ include file="Footer.jsp" %>
 </body>
 </html>

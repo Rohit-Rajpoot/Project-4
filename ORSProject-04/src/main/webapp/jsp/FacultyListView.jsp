@@ -1,13 +1,12 @@
+
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="in.co.rays.controller.FacultyListCtl"%>
-<%@page import="java.util.Iterator"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.controller.FacultyListCtl"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
+<%@page import="in.co.rays.proj4.bean.FacultyBean"%>
 <%@page import="java.util.List"%>
-<%@page import="in.co.rays.bean.FacultyBean"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
 <html>
 <head>
 <title>Faculty List</title>
@@ -91,7 +90,7 @@
 					<td style="text-align: center; text-transform: capitalize;"><%=bean.getGender()%></td>
 					<td style="text-align: center;"><%=bean.getMobileNo()%></td>
 					<%
-						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+						SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 						String date = sdf.format(bean.getDob());
 					%>
 					<td style="text-align: center;"><%=date%></td>
@@ -125,6 +124,5 @@
 			%>
 		</form>
 	</div>
-	<%@ include file="Footer.jsp" %>
 </body>
 </html>

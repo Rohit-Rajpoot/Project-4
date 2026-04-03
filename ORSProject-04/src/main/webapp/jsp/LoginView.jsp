@@ -1,10 +1,8 @@
-<%@page import="in.co.rays.controller.LoginCtl"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.controller.ORSView"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+ 
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="in.co.rays.proj4.controller.LoginCtl"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
 <html>
 <head>
 <title>Login</title>
@@ -16,10 +14,11 @@
 	<form action="<%=ORSView.LOGIN_CTL%>" method="post">
 		<%@ include file="Header.jsp"%>
 
-		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
+		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>
 
 		<div align="center">
+
 
 			<h1 align="center" style="margin-bottom: -15; color: navy">Login</h1>
 
@@ -34,7 +33,14 @@
 				</H3>
 			</div>
 
-			<input type="hidden" name="id" value="<%=bean.getId()%>">
+			<input type="hidden" name="id" value="<%=bean.getId()%>"> <input
+				type="hidden" name="createdBy" value="<%=bean.getCreatedBy()%>">
+			<input type="hidden" name="modifiedBy"
+				value="<%=bean.getModifiedBy()%>"> <input type="hidden"
+				name="createdDatetime"
+				value="<%=DataUtility.getTimestamp(bean.getCreatedDatetime())%>">
+			<input type="hidden" name="modifiedDatetime"
+				value="<%=DataUtility.getTimestamp(bean.getModifiedDatetime())%>">
 			<%
 				String uri = (String) request.getAttribute("uri");
 			%>
@@ -59,10 +65,6 @@
 				</tr>
 				<tr>
 					<th></th>
-					<td></td>
-				</tr>
-				<tr>
-					<th></th>
 					<td colspan="2"><input type="submit" name="operation"
 						value="<%=LoginCtl.OP_SIGN_IN%>"> &nbsp; <input
 						type="submit" name="operation" value="<%=LoginCtl.OP_SIGN_UP%>">
@@ -79,8 +81,6 @@
 				</tr>
 			</table>
 		</div>
-		<input type="hidden" name="uri" value="<%=uri%>">
 	</form>
-	<%@ include file="Footer.jsp" %>
 </body>
 </html>

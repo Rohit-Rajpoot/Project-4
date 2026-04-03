@@ -1,9 +1,6 @@
-<%@page import="in.co.rays.bean.RoleBean"%>
-<%@page import="in.co.rays.bean.UserBean"%>
-<%@page import="in.co.rays.controller.ORSView"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="in.co.rays.proj4.bean.UserBean"%>
+<%@page import="in.co.rays.proj4.bean.RoleBean"%>
 <html>
 <head>
 <title>Welcome to ORS</title>
@@ -25,15 +22,15 @@
 		%>
 
 		<h2 align="Center">
-			<a style="color: maroon" href="<%=ORSView.GET_MARKSHEET_CTL%>">Click here to see your
-				Marksheet </a>
+			<a style="color: maroon" href=<%=ORSView.GET_MARKSHEET_CTL%>>Click
+				here to see your Marksheet </a>
 		</h2>
 
 		<%
 			}
 			}
 		%>
-		<%@ include file="Footer.jsp"%>
+
 	</form>
 </body>
 </html>

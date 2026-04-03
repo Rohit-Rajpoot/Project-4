@@ -1,25 +1,26 @@
+
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
+<%@page import="in.co.rays.proj4.controller.UserRegistrationCtl"%>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="in.co.rays.util.HTMLUtility"%>
-<%@page import="in.co.rays.controller.ORSView"%>
-<%@page import="in.co.rays.controller.UserRegistrationCtl"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@page import="in.co.rays.util.DataUtility"%>
+<%@page import="java.util.Map"%>
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>UserRegistration</title>
+<title>User Registration</title>
+<link rel="icon" type="image/png"
+	href="<%=ORSView.APP_CONTEXT%>/img/logo.png" sizes="16x16" />
 </head>
-<body>
-	<%@ include file="Header.jsp"%>
-	
+<body ng-app="720" ng-controller="TestController as ctrl">
 	<form action="<%=ORSView.USER_REGISTRATION_CTL%>" method="post">
 
-
-		<jsp:useBean id="bean" class="in.co.rays.bean.UserBean"
+		<%@ include file="Header.jsp"%>
+		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.UserBean"
 			scope="request"></jsp:useBean>
+			<% HashMap <String,String> map =(HashMap <String,String>)request.getAttribute("map"); %>
 
 		<div align="center">
 			<h1 align="center" style="margin-bottom: -15; color: navy">User
@@ -84,20 +85,17 @@
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("confirmPassword", request)%></font></td>
 				</tr>
 				<tr>
-					<th align="left">Date of Birth<span style="width: 98%"
-						style="color: red">*</span></th>
-					<td><input type="text" id="udate" name="dob" placeholder="Select Date of Birth"
-						value="<%=DataUtility.getDateString(bean.getDob())%>"></td>
+					<th>DOB:</th>
+					<td><input type="text" name="dob" input type="text" id="udate"
+						name="dob" placeholder="Select Date of Birth"
+						value="<%=DataUtility.getDateString(bean.getDob())%>"
+						style="width: 98%"></td>
 					<td style="position: fixed;"><font color="red"> <%=ServletUtility.getErrorMessage("dob", request)%></font></td>
 				</tr>
 				<tr>
 					<th align="left">Gender<span style="color: red">*</span></th>
 					<td>
 						<%
-							HashMap<String, String> map = new HashMap<String, String>();
-							map.put("Female", "Female");
-							map.put("Male", "Male");
-
 							String htmlList = HTMLUtility.getList("gender", bean.getGender(), map);
 						%> <%=htmlList%>
 
@@ -125,6 +123,6 @@
 			</table>
 		</div>
 	</form>
-	<%@ include file="Footer.jsp" %>
+
 </body>
 </html>

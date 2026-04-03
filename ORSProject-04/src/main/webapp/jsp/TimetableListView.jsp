@@ -1,14 +1,13 @@
+<%@page import="in.co.rays.proj4.controller.ORSView"%>
+<%@page import="java.util.LinkedHashMap"%>
+<%@page import="in.co.rays.proj4.util.HTMLUtility"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="in.co.rays.controller.TimetableListCtl"%>
-<%@page import="in.co.rays.util.HTMLUtility"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="in.co.rays.bean.TimetableBean"%>
+<%@page import="in.co.rays.proj4.util.DataUtility"%>
+<%@page import="in.co.rays.proj4.controller.TimetableListCtl"%>
+<%@page import="in.co.rays.proj4.util.ServletUtility"%>
+<%@page import="in.co.rays.proj4.bean.TimetableBean"%>
 <%@page import="java.util.List"%>
-<%@page import="in.co.rays.util.DataUtility"%>
-<%@page import="in.co.rays.util.ServletUtility"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@page import="java.util.Iterator"%>
 <html>
 <head>
 <title>Timetable List</title>
@@ -29,7 +28,7 @@
 				<font color="green"><%=ServletUtility.getSuccessMessage(request)%></font>
 			</h3>
 		</div>
-		<jsp:useBean id="bean" class="in.co.rays.bean.TimetableBean"
+		<jsp:useBean id="bean" class="in.co.rays.proj4.bean.TimetableBean"
 			scope="request"></jsp:useBean>
 
 		<form action="<%=ORSView.TIMETABLE_LIST_CTL%>" method="post">
@@ -47,9 +46,7 @@
 
 				if (list.size() != 0) {
 			%>
-			<input type="hidden" name="id"
-				value="<%=DataUtility.getStringData(bean.getId())%>"> <input
-				type="hidden" name="pageNo" value="<%=pageNo%>"><input
+			<input type="hidden" name="pageNo" value="<%=pageNo%>"><input
 				type="hidden" name="pageSize" value="<%=pageSize%>">
 
 			<table style="width: 100%">
@@ -57,15 +54,10 @@
 					<td align="right"><label><b>Course Name :</b></label> <%=HTMLUtility.getList("courseId", String.valueOf(bean.getCourseId()), courseList)%>&emsp;
 						<label><b>Subject Name :</b></label> <%=HTMLUtility.getList("subjectId", String.valueOf(bean.getSubjectId()), subjectList)%>&emsp;
 						<label><b>Exam Date :</b></label></td>
-					<td align="left"><label class="input-group"> <span
-							class="input-group-addon"> <span
-								class="glyphicon glyphicon-calendar"></span>
-						</span> <span data-datepicker date-format="dd/MM/yyyy" date-typer="true">
-								<input type="text" id="udatee" name="examDate"
-								placeholder="Select Date of Exam"
-								value="<%=DataUtility.getDateString(bean.getExamDate())%>">
-						</span>
-					</label>&emsp; <input type="submit" name="operation"
+					<td align="left"><input type="text" id="udate" name="examDate"
+						placeholder="Select Date of Birth"
+						value="<%=DataUtility.getDateString(bean.getExamDate())%>">
+						</label>&emsp; <input type="submit" name="operation"
 						value="<%=TimetableListCtl.OP_SEARCH%>">&nbsp; <input
 						type="submit" name="operation"
 						value="<%=TimetableListCtl.OP_RESET%>"></td>
@@ -98,14 +90,14 @@
 					<td style="text-align: center; text-transform: capitalize;"><%=bean.getSubjectName()%></td>
 					<td style="text-align: center;"><%=bean.getSemester()%></td>
 					<%
-						SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+						SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 								String date = sdf.format(bean.getExamDate());
 					%>
 					<td style="text-align: center;"><%=date%></td>
 					<td style="text-align: center; text-transform: capitalize;"><%=bean.getExamTime()%></td>
 					<td style="text-align: center; text-transform: capitalize;"><%=bean.getDescription()%></td>
 					<td style="text-align: center;"><a
-						href="<%=ORSView.SUBJECT_CTL%>?id=<%=bean.getId()%>">Edit</a></td>
+						href="<%=ORSView.TIMETABLE_CTL%>?id=<%=bean.getId()%>">Edit</a></td>
 				</tr>
 				<%
 					}
@@ -116,7 +108,7 @@
 
 					<td style="width: 25%"><input type="submit" name="operation"
 						value="<%=TimetableListCtl.OP_PREVIOUS%>"
-						<%=pageNo != 1 ? "" : "disabled"%>></td>
+						<%=pageNo == 1 ? "" : "disabled"%>></td>
 					<td align="center" style="width: 25%"><input type="submit"
 						name="operation" value="<%=TimetableListCtl.OP_NEW%>"></td>
 					<td align="center" style="width: 25%"><input type="submit"
@@ -144,6 +136,5 @@
 
 		</form>
 	</div>
-	<%@ include file="Footer.jsp" %>
 </body>
 </html>

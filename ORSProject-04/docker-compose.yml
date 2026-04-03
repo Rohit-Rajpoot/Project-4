@@ -2,7 +2,7 @@ version: '3'
 services:
   mysql:
     image: mysql:8.0
-    container_name: ORSProject-04-mysql
+    container_name: ORS_Project4-mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: project04
@@ -12,10 +12,11 @@ services:
       - mynetwork
     volumes:
       - ./mysql-data:/var/lib/mysql
+
   webapp:
     build:
       context: .
-    container_name: ORSProject-04-webapp
+    container_name: ORS_Project4-webapp
     ports:
       - "8080:8080"
     networks:
@@ -24,6 +25,7 @@ services:
       - mysql
     environment:
       - DATABASE_URL=jdbc:mysql://mysql:3306/project04
+
 networks:
   mynetwork:
     driver: bridge
